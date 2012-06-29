@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
 	public List<User> listPage(int index, int size) {
 		Assert.isTrue(index<0, "起始行不能小于0");
 		Assert.isTrue(size<=0, "每页容量必须大于0");
-		return loginDao.getLimipage("select * from user", index-1, size,LimitPageHepler.getLimitPage(DataDialect.SQLSERVER));
+		return loginDao.getLimipage("select * from user", index-1, size,LimitPageHepler.getLimitPage(DataDialect.MYSQL));
 	}
 
 }
