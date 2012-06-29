@@ -73,5 +73,11 @@ public class LoginController {
 		model.addAttribute("userList", userList);
 		return "list";
 	}
+	@RequestMapping(value = "/validate", method = RequestMethod.GET)
+	public String validate( Model model) {
+		List<User> userList = loginService.listPage(0, 2);
+		model.addAttribute("userList", userList);
+		return "list";
+	}
 
 }
