@@ -105,10 +105,11 @@ a{ color:#FFFFFF; text-decoration:none;}
 	$(document).ready(function() {
 		$("#name").focus();
 		$("tr#regitinfo").hide();
-		});
+	});
 	$("td.Sign-r").click(function(){
 		if(validate ())
 			$("form").submit();
+		ajax();
 	})
 	$("td#regit").click(function(){
 		if(	$("form").attr("action") == "loginto"){
@@ -141,7 +142,29 @@ a{ color:#FFFFFF; text-decoration:none;}
 			}
 		}
 		return true;
-		
 	}
+	
+	function ajax(){
+		   $.ajax({
+			   type:"GET",
+		        url: 'validate',
+		        data: ({userName : $("#name").val()}),
+		        success: function(data) {
+		        	if(data.length>0)
+		         		alert(data);
+		        		$("#name").attr("value","");
+		        		$("#name").focus();
+		        },
+		  		 error:function(){
+		   			alert("无响应");
+		  		 }
+		     });
+	}
+	$("#name").change(function(){
+		if($("form").attr("action")=="regit")
+			ajax();
+	})
+	
+
 </script>
 </html>

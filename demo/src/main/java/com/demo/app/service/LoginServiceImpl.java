@@ -31,10 +31,10 @@ public class LoginServiceImpl implements LoginService {
 
 	public boolean nameIsUsed(String name) {
 		String sql = "select * from user where user_name = '"+StringUtils.trim(name)+"'";
-		User user1  = loginDao.getJdbcTemplate().queryForObject(sql, new UserRowMapper());
-		if (user1!=null)
-				return true;
-		return false;
+		List<User> user  =  loginDao.getJdbcTemplate().query(sql, new UserRowMapper());
+		if (user.size()==0)
+				return false;
+		return true;
 	}
 
 	public Date getLogonDate() {
@@ -58,8 +58,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	public List<User> listPage(int index, int size) {
-		Assert.isTrue(index<0, "起始行不能小于0");
-		Assert.isTrue(size<=0, "每页容量必须大于0");
+		Assert.isTrue(index>=0, "起始行不能小于0");
+		Assert.isTrue(size>0, "每页容量必须大于0");
 		return loginDao.getLimipage("select * from user", index-1, size,LimitPageHepler.getLimitPage(DataDialect.MYSQL));
 	}
 
