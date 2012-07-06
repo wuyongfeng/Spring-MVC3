@@ -21,20 +21,21 @@ $(document).ready(function(){
 		url: 'jsonList',
 		dataType: 'json',
 		colModel : [
-			{display: 'ISO', name : 'iso', width : 40, sortable : true, align: 'center'},
-			{display: 'Name', name : 'name', width : 180, sortable : true, align: 'left'},
-			{display: 'Printable Name', name : 'printable_name', width : 120, sortable : true, align: 'left'},
-			{display: 'ISO3', name : 'iso3', width : 130, sortable : true, align: 'left', hide: true},
-			{display: 'Number Code', name : 'numcode', width : 80, sortable : true, align: 'right'}
+			{display: '用户ID', name : 'id', width : 100, sortable : true, align: 'center'},
+			{display: '注册时间', name : 'date', width : 130, sortable : true, align: 'left'},
+			{display: '用户名', name : 'name', width : 180, sortable : true, align: 'left'},
+			{display: '密码', name : 'password', width : 120, sortable : true, align: 'left'}
 			],
+		buttons : [
+		   		{name: 'Add', bclass: 'add', onpress : test},
+		   		{name: 'Delete', bclass: 'delete', onpress : test},
+		   		{separator: true}
+		   		],
 		searchitems : [
-			{display: 'ISO', name : 'iso'},
-			{display: 'Name', name : 'name', isdefault: true}
+			{display: '用户名', name : 'name', isdefault: true}
 			],
-		sortname: "iso",
-		sortorder: "asc",
 		usepager: true,
-		title: 'Countries',
+		title: '用户列表',
 		useRp: true,
 		rp: 15,
 		showTableToggleBtn: true,
@@ -42,6 +43,13 @@ $(document).ready(function(){
 		height: 200
 	});   
 })
-
+function test(com, grid) {
+			if (com == 'Delete') {
+				var gridp = grid;
+				confirm('Delete ' + $('.trSelected', grid).length + ' items?')
+			} else if (com == 'Add') {
+				alert('Add New Item');
+			}
+		}
 </script>
 </html>
