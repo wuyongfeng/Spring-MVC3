@@ -16,9 +16,6 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<context:component-scan base-package="com.demo.app" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory -->
-
 	<!-- 数据库配置 -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<beans:property name="driverClassName"  value="com.mysql.jdbc.Driver" />
