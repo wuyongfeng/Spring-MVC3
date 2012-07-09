@@ -109,7 +109,7 @@ a{ color:#FFFFFF; text-decoration:none;}
 	$("td.Sign-r").click(function(){
 		if(validate ())
 			$("form").submit();
-	})
+	});
 	$("td#regit").click(function(){
 		if(	$("form").attr("action") == "loginto"){
 			$("tr#regitinfo").show("normal",function(){
@@ -126,7 +126,7 @@ a{ color:#FFFFFF; text-decoration:none;}
 				
 			});
 		}
-	})
+	});
 	function validate (){
 		if($("#name").attr("value")==""){
 			alert("用户名不能为空！");
@@ -143,6 +143,10 @@ a{ color:#FFFFFF; text-decoration:none;}
 		return true;
 	}
 	
+	$("#name").change(function(){
+		if($("form").attr("action")=="regit")
+			ajax();
+	});
 	function ajax(){
 		   $.ajax({
 			   type:"GET",
@@ -160,10 +164,6 @@ a{ color:#FFFFFF; text-decoration:none;}
 		  		 }
 		     });
 	}
-	$("#name").change(function(){
-		if($("form").attr("action")=="regit")
-			ajax();
-	})
 	
 
 </script>
