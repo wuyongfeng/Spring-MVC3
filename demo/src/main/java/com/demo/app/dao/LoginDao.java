@@ -44,7 +44,6 @@ public class LoginDao implements JdbcDao<String, User> {
 		jdbcTemplate.update(sql,
 				new Object[] { SupporterUtil.getMd5Psw(user.getPassword()) },
 				user.getName(), new int[] { Types.VARCHAR, Types.VARCHAR });
-
 	}
 
 	/**

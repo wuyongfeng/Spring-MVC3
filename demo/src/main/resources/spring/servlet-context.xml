@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+		>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 
 	<!-- Enables the Spring MVC @Controller programming model -->
+	<tx:annotation-driven transaction-manager="txManager" />
 	<annotation-driven />
   
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
@@ -30,6 +37,7 @@
 		<beans:property name="maxIdle"  value="2" />
 		<!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
 		<beans:property name="minIdle"  value="2" />
+		<beans:property name="defaultAutoCommit" value="false" />
 	</beans:bean>
 	<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<beans:property name="dataSource" ref="dataSource" />
@@ -38,6 +46,7 @@
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
         <beans:property name="dataSource" ref="dataSource" />  
     </beans:bean>  
+    
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

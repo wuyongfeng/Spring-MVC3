@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +22,8 @@ import com.demo.app.util.SupporterUtil;
 public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private LoginDao loginDao;
-
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoginServiceImpl.class);
 	public boolean canAccess(User user) {
 		String sql = "select * from user where user_name = '"+StringUtils.trim(user.getName())+"'";
 		User user1  = loginDao.getJdbcTemplate().queryForObject(sql, new UserRowMapper());

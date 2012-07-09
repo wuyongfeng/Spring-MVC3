@@ -60,6 +60,7 @@ public class LoginController {
 	public String regit(@ModelAttribute("user") User user, Model model) {
 		Assert.notNull(user, "非法访问");
 		Assert.hasText(user.getName(), "非法访问");
+		logger.debug(loginService.getClass().toString());
 		loginService.regit(user);
 		model.addAttribute("name", user.getName());
 		return "success";

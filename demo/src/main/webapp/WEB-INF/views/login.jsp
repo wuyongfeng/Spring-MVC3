@@ -109,7 +109,6 @@ a{ color:#FFFFFF; text-decoration:none;}
 	$("td.Sign-r").click(function(){
 		if(validate ())
 			$("form").submit();
-		ajax();
 	})
 	$("td#regit").click(function(){
 		if(	$("form").attr("action") == "loginto"){
@@ -150,10 +149,11 @@ a{ color:#FFFFFF; text-decoration:none;}
 		        url: 'validate',
 		        data: ({userName : $("#name").val()}),
 		        success: function(data) {
-		        	if(data.length>0)
+		        	if(data.length>0){
 		         		alert(data);
 		        		$("#name").attr("value","");
 		        		$("#name").focus();
+		        	}
 		        },
 		  		 error:function(){
 		   			alert("无响应");
